@@ -8,6 +8,10 @@
 // but is instead the result of taking JSON as input and parsing it to produce a JavaScript object.
 
 const imageContainer = document.getElementById('imagecontainer')
+const myLoader = document.getElementById('loader')
+function controlLoader(){
+    myLoader.hidden = false
+}
 async function getImages(){
     const response = await fetch ('https://api.unsplash.com/photos/?client_id=WS3HmHu2MfMspYiEeKl9NaqTR-gq3bc2IoLMwUKuf7M')
     // console.log(response);
@@ -22,8 +26,9 @@ async function getImages(){
         imageContainer.append(myImageElement)
     })
 }
-
-getImages();
+setTimeout(()=>{getImages();
+    myLoader.hidden = true
+},1000);
 
 window.addEventListener('scroll', function(){
     let myClientHeight = document.documentElement.clientHeight
